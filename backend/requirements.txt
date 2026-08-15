@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pymongo[srv]
+python-dotenv
+pydantic
+scikit-learn
+pandas
+requests
+numpy
