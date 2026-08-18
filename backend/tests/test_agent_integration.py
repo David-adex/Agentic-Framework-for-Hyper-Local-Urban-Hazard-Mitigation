@@ -46,7 +46,7 @@ def test_agent_uses_mongo_context_for_model_prompt(monkeypatch):
     agent = MCPAgent(collection=FakeCollection(docs))
     query = AgentQuery(
         event_id="evt-1",
-        location=GeoPoint(type="Point", coordinates=[-0.09, 51.50]),
+        location=GeoPoint(coordinates=[-0.09, 51.50]),
         anomaly=AnomalyResult(
             sensor_id="sensor-1",
             timestamp=datetime.utcnow(),
@@ -68,7 +68,7 @@ def test_agent_falls_back_to_local_recommendation_when_no_api_key(monkeypatch):
     agent = MCPAgent(collection=FakeCollection([]))
     query = AgentQuery(
         event_id="evt-2",
-        location=GeoPoint(type="Point", coordinates=[-0.1, 51.51]),
+        location=GeoPoint(coordinates=[-0.1, 51.51]),
         anomaly=AnomalyResult(
             sensor_id="sensor-2",
             timestamp=datetime.utcnow(),

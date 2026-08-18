@@ -2,6 +2,7 @@ import os
 from typing import Any, Dict, List
 
 from anthropic import Anthropic
+from anthropic.types import TextBlock
 
 from .db import get_sensor_collection
 from .schemas import AgentQuery, MitigationPlan
@@ -87,7 +88,11 @@ class MCPAgent:
                         }
                     ],
                 )
-                raw_text = response.content[0].text
+                block = response.content[0]
+                if isinstance(block, TextBlock):
+                     raw_text = block.text
+                else:
+                    raise ValueError(f"Expected a text block, got {type(block)}")
                 if raw_text:
                     return MitigationPlan(
                         location=query.location,

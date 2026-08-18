@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Any
 import numpy as np
 
-from .schemas import SensorReading, AnomalyResult
+from .schemas import SensorReading, AnomalyResult, GeoPoint
 
 
 def generate_dummy_sensor_data(center: List[float], count: int = 20) -> List[SensorReading]:
@@ -14,7 +14,7 @@ def generate_dummy_sensor_data(center: List[float], count: int = 20) -> List[Sen
         reading = SensorReading(
             sensor_id=f"sensor-{i+1}",
             timestamp=now - timedelta(minutes=5 * i),
-            location={"type": "Point", "coordinates": [lon, lat]},
+            location=GeoPoint(coordinates=[lon, lat]),
             temperature_c=20 + np.random.normal(scale=4),
             humidity_pct=55 + np.random.normal(scale=10),
             pressure_hpa=1010 + np.random.normal(scale=4),
